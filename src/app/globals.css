@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0a0a0f;
-  --bg-card: #111118;
-  --bg-card-hover: #16161f;
-  --border: #1e1e2e;
-  --border-hover: #2e2e4e;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
-  --accent: #818cf8;
-  --accent-hover: #a5b4fc;
-  --accent-dim: rgba(129, 140, 248, 0.1);
-  --accent-glow: rgba(129, 140, 248, 0.2);
+  /* Cursed Shrine monochrome colorway */
+  --bg: #0d0d0d;
+  --bg-card: rgba(17, 17, 17, 0.72);
+  --bg-card-hover: rgba(26, 26, 26, 0.82);
+  --border: #222;
+  --border-hover: #555;
+  --text-primary: #f0f0f0;
+  --text-secondary: #999;
+  --text-muted: #555;
+  --accent: #e9ecef;
+  --accent-hover: #ffffff;
+  --accent-dim: rgba(233, 236, 239, 0.08);
+  --accent-glow: rgba(233, 236, 239, 0.18);
   --green: #34d399;
-  --cyan: #22d3ee;
+  --cyan: #adb5bd;
 }
 
 @theme inline {
@@ -36,7 +37,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: #0d0d0d;
 }
 
 ::-webkit-scrollbar {
@@ -46,11 +47,25 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-hover);
+  background: #333;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
+}
+
+/* ── Space canvas ── */
+.space-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Glass cards (stars visible through them) ── */
+.glass {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 @keyframes fade-up {
@@ -74,12 +89,47 @@ body {
   50% { opacity: 0; }
 }
 
+/* ── Floating drift for fantasy elements ── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-4deg); }
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  70% { transform: scale(1.08); opacity: 0.1; }
+  100% { transform: scale(0.95); opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 .animate-fade-up {
   animation: fade-up 0.6s ease both;
 }
 
 .animate-fade-in {
   animation: fade-in 0.5s ease both;
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 11s ease-in-out infinite;
 }
 
 .delay-100 { animation-delay: 0.1s; }
@@ -93,6 +143,45 @@ body {
 .cursor-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* ── Shimmering name gradient ── */
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    #f0f0f0 20%,
+    #ffffff 40%,
+    #6c757d 50%,
+    #ffffff 60%,
+    #f0f0f0 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* ── Orbit rings behind hero ── */
+.orbit-ring {
+  position: absolute;
+  border: 1px solid rgba(240, 240, 240, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orbit-ring::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(240, 240, 240, 0.5);
+  box-shadow: 0 0 8px rgba(240, 240, 240, 0.6);
+}
+.orbit-spin-1 { animation: orbit-spin 24s linear infinite; }
+.orbit-spin-2 { animation: orbit-spin 38s linear infinite reverse; }
+.orbit-spin-3 { animation: orbit-spin 55s linear infinite; }
 
 .grid-bg {
   background-image:
@@ -110,4 +199,15 @@ body {
 .section-reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text,
+  .orbit-spin-1,
+  .orbit-spin-2,
+  .orbit-spin-3,
+  .animate-float-slow,
+  .animate-float-slower {
+    animation: none;
+  }
 }

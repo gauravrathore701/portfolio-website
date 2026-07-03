@@ -167,7 +167,7 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="w-full py-2.5 rounded-lg bg-[var(--accent)] text-white font-medium text-sm hover:bg-[var(--accent-hover)] transition-all hover:shadow-[0_0_20px_var(--accent-glow)] cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[var(--accent)] text-[#0d0d0d] font-medium text-sm hover:bg-[var(--accent-hover)] transition-all hover:shadow-[0_0_20px_var(--accent-glow)] cursor-pointer"
             >
               Send Message →
             </button>

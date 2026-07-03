@@ -3,8 +3,12 @@
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-bg opacity-[0.03]" />
+      {/* Orbit rings — cosmic fantasy layer */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="orbit-ring orbit-spin-1 w-[420px] h-[420px]" />
+        <div className="orbit-ring orbit-spin-2 w-[620px] h-[620px] absolute" />
+        <div className="orbit-ring orbit-spin-3 w-[840px] h-[840px] absolute hidden sm:block" />
+      </div>
 
       {/* Radial glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -12,14 +16,20 @@ export default function Hero() {
           className="w-[600px] h-[600px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(240,240,240,0.05) 0%, transparent 70%)",
           }}
         />
       </div>
 
+      {/* Floating cosmic drifters */}
+      <span className="absolute top-[18%] left-[12%] text-2xl opacity-30 animate-float-slow pointer-events-none select-none">🪐</span>
+      <span className="absolute top-[28%] right-[14%] text-xl opacity-25 animate-float-slower pointer-events-none select-none">🌙</span>
+      <span className="absolute bottom-[22%] left-[18%] text-lg opacity-20 animate-float-slower pointer-events-none select-none">☄️</span>
+      <span className="absolute bottom-[30%] right-[10%] text-2xl opacity-25 animate-float-slow pointer-events-none select-none">🛸</span>
+
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Status badge */}
-        <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-card)] text-xs text-[var(--text-secondary)] mb-8">
+        <div className="animate-fade-up glass inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-card)] text-xs text-[var(--text-secondary)] mb-8">
           <span className="w-2 h-2 rounded-full bg-[var(--green)] animate-pulse" />
           Available for opportunities
         </div>
@@ -27,15 +37,7 @@ export default function Hero() {
         {/* Name */}
         <h1 className="animate-fade-up delay-100 text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4 leading-none">
           Hi, I&apos;m{" "}
-          <span
-            className="text-transparent bg-clip-text"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%)",
-            }}
-          >
-            Gaurav
-          </span>
+          <span className="shimmer-text">Gaurav</span>
         </h1>
 
         {/* Role */}
@@ -58,7 +60,7 @@ export default function Hero() {
                 .getElementById("projects")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="px-6 py-3 rounded-lg font-medium text-sm bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-all hover:shadow-[0_0_20px_var(--accent-glow)] cursor-pointer"
+            className="px-6 py-3 rounded-lg font-medium text-sm bg-[var(--accent)] text-[#0d0d0d] hover:bg-[var(--accent-hover)] transition-all hover:shadow-[0_0_24px_var(--accent-glow)] cursor-pointer"
           >
             View My Work
           </button>
@@ -92,8 +94,11 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <div className="w-px h-8 bg-gradient-to-b from-[var(--border)] to-transparent" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[var(--text-muted)] animate-pulse">
+          scroll to warp
+        </span>
+        <div className="w-px h-8 bg-gradient-to-b from-[var(--text-muted)] to-transparent animate-bounce" />
       </div>
     </section>
   );
